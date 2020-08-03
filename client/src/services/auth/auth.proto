@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  rpc Login (LoginDetails) returns (LoginResponse) {}
+  rpc VerifyCredentials (LoginDetails) returns (IsValid) {}
+  rpc Signup (SignupDetails) returns (LoginResponse) {}
+  rpc VerifyLogin(TokenData) returns (IsValid){}
+  rpc GetDecoded(TokenData) returns (DecodedResponse){}
+  rpc VerifyAdmin(TokenData) returns (IsValid){}
+}
+
+message LoginDetails {
+    string email = 1;
+    string password = 2;
+}
+
+message TokenData {
+    string token = 1;
+}
+
+message DecodedResponse{
+    string _id = 1;
+    string email = 2;
+    bool isAdmin = 3;
+}
+
+message LoginResponse {
+    string email = 1;
+    string _id = 2;
+    string firstName = 3;
+    string lastName = 4;
+    bool isAdmin = 5;
+    string token = 6;
+}
+
+message IsValid {
+    bool isValid = 1;
+}
+
+message SignupDetails {
+  string email = 1;
+  string password = 2;
+  string firstName = 3;
+  string lastName = 4;
+}

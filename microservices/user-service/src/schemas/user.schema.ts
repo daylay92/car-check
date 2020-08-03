@@ -21,9 +21,8 @@ export class User extends Document {
     @Prop({ required: true })
     hash: string;
 
-    @Prop({ required: true })
-    salt: string;
-
+    @Prop({ required: true, default: true })
+    isAdmin: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

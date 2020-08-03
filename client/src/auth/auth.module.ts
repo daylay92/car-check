@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './app.controller';
-import { AuthService } from './app.service';
+import { AuthController } from './auth.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import { ConfigModule } from '@nestjs/config';
@@ -10,17 +9,16 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({ isGlobal: true }),
     ClientsModule.register([
       {
-        name: 'USER_PACKAGE',
+        name: 'AUTH_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          package: 'user',
-          protoPath: join(__dirname, 'client/user/user.proto'),
-          url: process.env.USER_SERVICE_URL,
+          package: 'auth',
+          protoPath: join(__dirname, '../services/auth/auth.proto'),
+          url: process.env.AUTH_SERVICE_URL,
         },
       },
     ])
   ],
   controllers: [AuthController],
-  providers: [AuthService],
 })
-export class AppModule {}
+export class AuthModule {}
