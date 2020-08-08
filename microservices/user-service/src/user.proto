@@ -9,7 +9,7 @@ service UserService {
 }
 
 message UserId {
-  int32 id = 1;
+  string id = 1;
 }
 
 message UserEmail {
@@ -17,14 +17,14 @@ message UserEmail {
 }
 
 message UserResponse {
-  int32 _id = 1;
+  string _id = 1;
   string firstName = 2;
   string lastName = 3;
   string hash  = 4;
   string email = 5;
   bool isAdmin = 6;
-  // string createdAt = 7;
-  // string updatedAt = 8;
+  string createdAt = 7;
+  string updatedAt = 8;
 }
 
 message UserData {
@@ -35,10 +35,10 @@ message UserData {
   }
 
 message NewUser {
-    int32 _id = 1;
+    string _id = 1;
     string firstName = 2;
     string lastName = 3;
     string email = 4;
     bool isAdmin = 5;
-    // string createdAt = 7;
+    string createdAt = 6;
   }

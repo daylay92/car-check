@@ -13,8 +13,8 @@ export interface UserResponse {
     hash: string;
     email: string;
     isAdmin: boolean;
-    // createdAt: string;
-    // updatedAt: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface UserData {
@@ -30,6 +30,7 @@ export interface NewUser {
     lastName: string;
     email: string;
     isAdmin: boolean;
+    createdAt: string;
 }
 
 export interface UserService{

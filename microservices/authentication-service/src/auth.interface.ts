@@ -20,6 +20,7 @@ export interface LoginResponse {
     firstName: string;
     lastName: string;
     token:  string;
+    createdAt: string;
 }
 
 export interface IsValid {

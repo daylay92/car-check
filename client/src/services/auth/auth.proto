@@ -33,6 +33,7 @@ message LoginResponse {
     string lastName = 4;
     bool isAdmin = 5;
     string token = 6;
+    string createdAt = 7;
 }
 
 message IsValid {

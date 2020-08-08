@@ -14,11 +14,22 @@ import { ConfigModule } from '@nestjs/config';
         options: {
           package: 'auth',
           protoPath: join(__dirname, '../services/auth/auth.proto'),
-          url: process.env.AUTH_SERVICE_URL,
+          url: 'localhost:5002',
         },
       },
     ])
   ],
   controllers: [AuthController],
+  exports: []
 })
 export class AuthModule {}
+
+export const promisify = <T extends object>(service: T) => {
+  return new Proxy(service, {
+    get: (service: any, methodName: string) => {
+      return async (...params) => {
+        return await service[methodName](...params).toPromise()
+      }
+    }
+  })
+}

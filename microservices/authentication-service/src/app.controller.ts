@@ -21,6 +21,7 @@ export class AuthController {
       firstName,
       lastName,
       isAdmin,
+      createdAt
     } = await this.authService.validateUser(data.email, data.password);
     const token = this.authService.generateToken({ _id, email, isAdmin });
     return {
@@ -30,6 +31,7 @@ export class AuthController {
       lastName,
       isAdmin,
       token,
+      createdAt
     };
   }
 

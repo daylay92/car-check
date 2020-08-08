@@ -2,16 +2,17 @@ import { Injectable, OnModuleInit, Inject } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { UserService, UserResponse, UserData, NewUser } from './client/user/user.interface';
 import { compare, genSaltSync, hashSync } from 'bcrypt';
-import {sign, verify } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { IPayload } from './interfaces/auth.interface';
+import { promisify } from './gprc.options';
 
 @Injectable()
 export class AuthService implements OnModuleInit {
   private userService: UserService;
   constructor(@Inject('USER_PACKAGE') private client: ClientGrpc, private configService: ConfigService) {}
   onModuleInit() {
-    this.userService = this.client.getService<UserService>('UserService');
+    this.userService = promisify(this.client.getService<UserService>('UserService'));
   }
   async validateUser(
     email: string,
@@ -24,7 +25,8 @@ export class AuthService implements OnModuleInit {
   }
 
 async register(data: UserData): Promise<NewUser>{
-  return this.userService.create(data);
+  const u = await this.userService.create(data);
+  return u;
 } 
 
   generateToken(payload: IPayload, expiresIn  = '2h'): string {
