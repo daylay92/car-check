@@ -27,7 +27,7 @@
     "@nestjs/microservices": "^7.4.2",
     "@nestjs/mongoose": "^7.0.2",
     "@nestjs/passport": "^7.1.0",
-    "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/platform-express": "^9.2.1",
     "grpc": "^1.24.3",
     "mongoose": "^5.9.27",
     "nestjs-easyconfig": "^2.0.2",
